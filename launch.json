@@ -1,0 +1,17 @@
+{
+  "kind": "evm_project",
+  "token": null,
+  "contracts": [
+    {
+      "contract": "Docket",
+      "constructorArgs": []
+    }
+  ],
+  "pool": {
+    "pairedCurrency": "0x0000000000000000000000000000000000000000",
+    "fee": 3000,
+    "tickSpacing": 60,
+    "initialPrice": "79228162514264337593543950336"
+  },
+  "notes": "BLOCKED DRAFT: this is not a schema-valid or deployable LaunchManifest. The sole production contract is src/Docket.sol:Docket, with an implicit nonpayable zero-argument constructor and no dependencies, owner, privileges, or initialization. Its functions are createIdea(string,string), comment(uint256,string), ideaCount(), and commentCount(uint256); its events are IdeaCreated and CommentPosted. The accepted tree has no ERC-20 implementation, and the application brief excludes a token. The required token object cannot truthfully be populated. Existing token:null records this unresolved incompatibility; it is not a supported tokenless evm_project representation. Both supplied protected files were inspected. The project checks require an actual token with policy supply held by the factory; the token checks require ERC-20 behavior absent from Docket. Protected checks were not run or claimed to pass. The unchanged pool fields are reference defaults, not validated deployment inputs. Local verification used Forge 1.8.3 and Solidity 0.8.26. forge build exited 0, with an existing environment-read-across-mutation lint warning at test/Docket.t.sol:286. forge test exited 1: 29 passed and testGasCommentTypicalFirst failed. forge config --json reports isolate:true. The targeted forge test --match-test testGasCommentTypicalFirst -vvvv trace charges 61,365 gas for the first 500-byte comment, exceeding the test's 50,000-gas assertion; its total test gas is 67,879. Diagnostic forge test --no-isolate exited 0 with all 30 tests passing; the first typical-comment test uses 38,323 gas, matching the committed snapshot. This demonstrates a gas-accounting mode mismatch, not a repair of the required default check or a sub-50k full-transaction cost. Additional commands used FOUNDRY_OUT=test/scratch/out and FOUNDRY_CACHE_PATH=test/scratch/cache: forge build --deny warnings failed at lint; forge inspect Docket abi --json confirmed no token interface; the targeted trace and --no-isolate run used these same output overrides. Required upstream resolution: supply an authorized accepted ERC-20 implementation or revise the schema and protected checks for a tokenless project; reconcile the execution-only gas assertion with isolated transaction accounting and fix the lint in the accepted tests. These changes cannot be expressed in launch.json. Only this manifest's notes were edited; production source, tests, configuration and pool defaults remain unchanged. No deployment, publication, or passing manifest validation is claimed."
+}
